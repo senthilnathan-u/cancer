@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content=
+		"width=device-width, initial-scale=1.0">
+
+	<!-- These are the jQuery extensions taken from
+		bootstrap website to enable the drop down
+		function of the menu bar -->
+	<link rel="stylesheet" href=
+"https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css">
+
+	<script src=
+"https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js">
+	</script>
+
+	<script src=
+"https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js">
+	</script>
+
+	<!-- Default bootstrap CSS link taken from the
+		bootstrap website-->
+	<link rel="stylesheet" href=
+"https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+	<script src=
+"https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js">
+	</script>
+    
+	<style>
+		.mul-select {
+			width: 160%;
+		}
+		
+		h1 {
+			color: green;
+		}
+	</style>
+</head>
+
+<body>
+	<form method="post">
+		{% csrf_token %}
+	<div class="container-fluid h-100 bg-dark">
+		<div class="row justify-content-center align-items-center">
+			<h1>Select Options</h1>
+		</div>
+		<br>
+
+		<!-- These modifications are done to make the webpage
+			adaptive to the screen size and automatically
+			reduce the size when screen is minimized -->
+		<div class="row justify-content-center align-items-center h-100">
+			<div class="col col-sm-6 col-md-6 col-lg-4 col-xl-3">
+				<div class="form-group">
+
+					<!-- Various options in drop down menu to
+						select the types of data structures
+						that we need -->
+					<select class="mul-select" multiple="true" id="d">
+						<option value="Stack">Stack</option>
+						<option value="Queue">Queue</option>
+						<option value="Linked-List">Linked-List</option>
+						<option value="Heap">Heap</option>
+						<option value="Binary-Tree">Binary-Tree</option>
+						<option value="Graph">Graph</option>
+						<option value="Array">Array</option>
+					</select>
+                    
+				</div>
+			</div>
+		</div>
+	</div>
+	<div>Age Range
+		<span>From:</span>
+		<SELECT id="age" onchange="dropdown_rangeChange('age', 'age1')">
+			<OPTION value="0">0</option>
+			<OPTION value="5">5</OPTION>
+			<OPTION value="10">10</OPTION>
+			<OPTION value="15">15</OPTION>
+			<OPTION value="20">20</OPTION>
+			<OPTION value="25">25</OPTION>
+			<OPTION value="30">30</OPTION>
+			<OPTION value="35">35</OPTION>
+			<OPTION value="40">40</OPTION>
+			<OPTION value="45">45</OPTION>
+			<OPTION value="50">50</OPTION>
+			<OPTION value="55">55</OPTION>
+			<OPTION value="60">60</OPTION>
+			<OPTION value="65">65</OPTION>
+			<OPTION value="70">70</OPTION>
+			<OPTION value="75">75+</OPTION>
+		</SELECT>
+		<span>To:</span>
+		<SELECT id="age1">
+			<OPTION value="4">4</OPTION>
+			<OPTION value="9">9</OPTION>
+			<OPTION value="14">14</OPTION>
+			<OPTION value="19">19</OPTION>
+			<OPTION value="24">24</OPTION>
+			<OPTION value="29">29</OPTION>
+			<OPTION value="34">34</OPTION>
+			<OPTION value="39">39</OPTION>
+			<OPTION value="44">44</OPTION>
+			<OPTION value="49">49</OPTION>
+			<OPTION value="54">54</OPTION>
+			<OPTION value="59">59</OPTION>
+			<OPTION value="64">64</OPTION>
+			<OPTION value="69">69</OPTION>
+			<OPTION value="74">74</OPTION>
+			<OPTION value="75">75+</OPTION>
+		</SELECT>
+		</div>
+    
+		<div>Year
+		<span>From:</span>
+		<select id ="year" name="year" onchange="year_change()">
+		</select>
+		
+		<span>To:</span>
+		<select id ="year1">
+		</select>
+		</div>
+	
+		<div>Gender
+			<input type="checkbox" id="male" value='1'>Male</input>
+			<input type="checkbox" id="female" value='2'>Female</input>
+		</div>
+		<div><button type="button" onclick="execute()">Execute</button></div>
+	</form>
+	<!-- JavaScript code to enable the drop down function -->
+	<script>
+		$(document).ready(function() {
+			$(".mul-select").select2({
+				placeholder: "select data-structures",
+				tags: true,
+			});
+		var dt=new Date();
+		var year = document.getElementById("year");
+		var year1 = document.getElementById("year1");
+		for(var i=1980;i<dt.getFullYear();i++){
+			var newyear= document.createElement("option");
+			newyear.value=i;
+			newyear.text=i;
+			var newyear1= document.createElement("option");
+			year.add(newyear);
+			if(i!=1980)
+			{
+				newyear1.value=i;
+				newyear1.text=i;
+				year1.add(newyear1);
+			}
+			
+		}
+	})
+	function year_change(){
+		
+		var year = document.getElementById("year");
+		var dt=new Date();
+		var year1 = document.getElementById("year1");
+		document.getElementById('year1').innerText = null;
+		for(var i=0;i<year.options.length;)
+		{
+			if(year.options[i].selected == true)
+			{
+				var options= year.options[i];
+				var start = options.value;
+				for(var j=parseInt(start)+1;j<dt.getFullYear();j++)
+				{
+					var newyear1= document.createElement("option");
+					newyear1.value=j;
+					newyear1.text=j;
+					year1.add(newyear1);
+				}
+			}
+			i++;
+		}
+
+	}
+
+
+
+
+	function dropdown_rangeChange(srcList,destList) {
+			var src = document.getElementById(srcList);
+			var dest = document.getElementById(destList);
+			document.getElementById('age1').innerText = null;
+			for(var count=0; count < src.options.length; count++) {
+				if(src.options[count].selected == true) {
+					var option = src.options[count];
+					var start = option.value;
+					if(start != 75){
+						for(var set=parseInt(start)+4; set<75 ; ){
+						var newOption = document.createElement("option");
+						newOption.value = set;
+						newOption.text = set;
+						dest.add(newOption);
+						set = set+5;
+					}
+					var newOption = document.createElement("option");
+						newOption.value = 75;
+						newOption.text = '75+';
+						dest.add(newOption);
+					}
+				}
+			}
+		}
+
+
+
+
+
+		function execute(){
+			var gender = [];
+			if(document.getElementById("male").checked == true){
+				gender.push(1);
+			}		
+			if(document.getElementById("female").checked == true){
+				gender.push(2);
+			}
+			var types = [];
+			var typeList = document.getElementById("d");
+			for(var count=0; count < typeList.options.length; count++) {
+				if(typeList.options[count].selected == true) {
+					var option= typeList.options[count]
+					types.push(option.value);
+				}
+			}
+			var yearRangeList = document.getElementById("age");
+			var yearRangeList1 = document.getElementById("age1");
+			var year;
+			var year1;
+			var yearRangeOutList = [];
+			for(var count=0; count < yearRangeList.options.length; count++) {
+				if(yearRangeList.options[count].selected == true) {
+					var option = yearRangeList.options[count];
+					year = option.value;
+				}
+			}
+			for(var count=0; count < yearRangeList1.options.length; count++) {
+				if(yearRangeList1.options[count].selected == true) {
+					var option = yearRangeList1.options[count];
+					year1 = option.value;
+				}
+			}
+			if(year == 75){
+				yearRangeOutList.push(1);
+				yearRangeOutList.push(2);
+				yearRangeOutList.push(3);
+				yearRangeOutList.push(4);
+				yearRangeOutList.push(5);
+				yearRangeOutList.push(6);
+				yearRangeOutList.push(7);
+				yearRangeOutList.push(8);
+				yearRangeOutList.push(9);
+				yearRangeOutList.push(10);
+				yearRangeOutList.push(11);
+				yearRangeOutList.push(12);
+				yearRangeOutList.push(13);
+				yearRangeOutList.push(14);
+				yearRangeOutList.push(15);
+				yearRangeOutList.push(16);
+			}else{
+				for(var i = parseInt(year) ; i< parseInt(year1) ; i++){
+					var temp = i + 4;
+					var key = i+"-"+temp;
+					if(key == "0-4"){
+						yearRangeOutList.push(1);
+					}
+					if(key == "5-9"){
+						yearRangeOutList.push(2);
+					}
+					if(key == "10-14"){
+						yearRangeOutList.push(3);
+					}
+					if(key == "15-19"){
+						yearRangeOutList.push(4);
+					}
+					if(key == "20-24"){
+						yearRangeOutList.push(5);
+					}
+					if(key == "25-29"){
+						yearRangeOutList.push(6);
+					}
+					if(key == "30-34"){
+						yearRangeOutList.push(7);
+					}
+					if(key == "35-39"){
+						yearRangeOutList.push(8);
+					}
+					if(key == "40-44"){
+						yearRangeOutList.push(9);
+					}
+					if(key == "45-49"){
+						yearRangeOutList.push(10);
+					}
+					if(key == "50-54"){
+						yearRangeOutList.push(11);
+					}
+					if(key == "55-59"){
+						yearRangeOutList.push(12);
+					}
+					if(key == "60-64"){
+						yearRangeOutList.push(13);
+					}
+					if(key == "65-69"){
+						yearRangeOutList.push(14);
+					}
+					if(key == "70-74"){
+						yearRangeOutList.push(15);
+					}
+					i = i + 4;
+				}
+				if(year1 == "75"){
+						yearRangeOutList.push(16);
+				}
+			}
+			var ageRangeFrom;
+			var ageRangeTo;
+			var rangeFrom = document.getElementById("year");
+			var rangeTo = document.getElementById("year1");
+			for(var count=0; count < rangeFrom.options.length; count++) {
+				if(rangeFrom.options[count].selected == true) {
+					var option = rangeFrom.options[count];
+					ageRangeFrom = option.value;
+				}
+			}
+			for(var count=0; count < rangeTo.options.length; count++) {
+				if(rangeTo.options[count].selected == true) {
+					var option = rangeTo.options[count];
+					ageRangeTo = option.value;
+				}
+			}
+			var searchArray = {
+				"gender" : gender,
+				"yearRangeFrom" : ageRangeFrom,
+				"yearRangeTo" : ageRangeTo,
+				"ageRange" : yearRangeOutList,
+				"types" : types
+			};
+			console.log(JSON.stringify(searchArray));
+		}
+	</script>
+</body>
+
+</html>

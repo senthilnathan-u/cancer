@@ -1,0 +1,288 @@
+
+<html>
+    <head>
+    <title>
+        Cancer
+    </title>
+
+    <style>
+    .Homebutton
+    {
+  background-color: #08a5ee;
+  border:20%;
+  border-color: black;
+  border-radius: 3%;
+  color: white;
+  padding: 10px 105px 10px;
+  text-align: center;
+  text-decoration:wavy;
+  display: inline-block;
+  font-size: 21px;
+  cursor: pointer;
+  outline-style: inset;
+  outline-color: #08a5eee0;  
+
+    }
+    div{
+            background-color: white;
+        }
+     p{
+            text-align: justify;
+       }
+    body {
+			font-family: Arial;
+		}
+	a {color: blue;}
+    </style>
+    <script src="https://rajalakshmicolleges.net/rocket-loader.min.js">
+        
+	$( document ).ready(function() {
+		var dt=new Date();
+		var year = document.getElementById(year);
+		var year1 = document.getElementById(year1);
+		for(var i=1980;idt.getFullYear();i++){
+			var newyear= document.createElement(option);
+			newyear.value=i;
+			newyear.text=i;
+			var newyear1= document.createElement(option);
+			year.add(newyear);
+			if(i!=1980)
+			{
+				newyear1.value=i;
+				newyear1.text=i;
+				year1.add(newyear1);
+			}
+			
+		}
+	});
+		function year_change(){
+		
+			var year = document.getElementById(year);
+			var dt=new Date();
+			var year1 = document.getElementById(year1);
+			document.getElementById('year1').innerText = null;
+			for(var i=0;iyear.options.length;)
+			{
+				if(year.options[i].selected == true)
+				{
+					var options= year.options[i]
+					var start = options.value;
+					for(var j=parseInt(start)+1;jdt.getFullYear();j++)
+					{
+						var newyear1= document.createElement(option);
+						newyear1.value=j;
+						newyear1.text=j;
+						year1.add(newyear1);
+					}
+				}
+				i++;
+			}
+
+		}
+		function listbox_move(listID, direction) {
+
+			var listbox = document.getElementById(listID);
+			var selIndex = listbox.selectedIndex;
+
+			if(-1 == selIndex) {
+				alert("Please select an option to move.");
+				return;
+			}
+
+			var increment = -1;
+			if(direction == 'up')
+				increment = -1;
+			else
+				increment = 1;
+
+			if((selIndex + increment) < 0 ||  
+				(selIndex + increment) > (listbox.options.length-1)) {
+				return;
+			}
+
+			var selValue = listbox.options[selIndex].value;
+			var selText = listbox.options[selIndex].text;
+			listbox.options[selIndex].value = listbox.options[selIndex + increment].value
+			listbox.options[selIndex].text = listbox.options[selIndex + increment].text
+
+			listbox.options[selIndex + increment].value = selValue;
+			listbox.options[selIndex + increment].text = selText;
+
+			listbox.selectedIndex = selIndex + increment;
+		}
+
+		function listbox_moveacross(sourceID, destID) {
+			var src = document.getElementById(sourceID);
+			var dest = document.getElementById(destID);
+
+			for(var count=0; count <src.options.length; count++) {
+
+				if(src.options[count].selected == true) {
+						var option = src.options[count];
+
+						var newOption = document.createElement(option);
+						newOption.value = option.value;
+						newOption.text = option.text;
+						newOption.selected = true;
+						try {
+								 dest.add(newOption, null);// Standard
+								 src.remove(count, null);
+						 }catch(error) {
+								 dest.add(newOption); // IE only
+								 src.remove(count);
+						 }
+						count--;
+
+				}
+
+			}
+
+		}
+		function listbox_selectall(listID, isSelect) {
+
+			var listbox = document.getElementById(listID);
+			for(var count=0; count < listbox.options.length; count++) {
+
+				listbox.options[count].selected = isSelect;
+
+			}
+		}
+		function dropdown_rangeChange(srcList,destList) {
+			var src = document.getElementById(srcList);
+			var dest = document.getElementById(destList);
+			document.getElementById('age1').innerText = null;
+			for(var count=0; count < src.options.length; count++) {
+				if(src.options[count].selected == true) {
+					var option = src.options[count];
+					var start = option.value;
+					if(start != 75){
+						for(var set=parseInt(start)+4; set75 ; ){
+						var newOption = document.createElement(option);
+						newOption.value = set;
+						newOption.text = set;
+						dest.add(newOption);
+						set = set+5;
+					}
+					var newOption = document.createElement(option);
+						newOption.value = 75;
+						newOption.text = '75+';
+						dest.add(newOption);
+					}
+				}
+			}
+		}
+    </script>
+    </head>
+  
+    <img src="https://ci5.iarc.fr/images/logoiarc.gif">
+    <img src="">
+    <body style="margin-left: 20%;margin-right: 20%;">
+        <div>
+           <a href="{% url 'home'%}" class="Homebutton">About Us</a>
+           <a href="{% url 'home2'%}" class="Homebutton">Online analysis</a>
+           <a href="{% url 'home3'%}" class="Homebutton">Help</a>
+          </div><br>
+          <img src="https://ci5.iarc.fr/CI5plus/gfx/com/banniere-ci5-website-new.jpg">
+          <div>
+            <table>
+                
+                Select
+                <a href="#" onclick="if (!window.__cfRLUnblockHandlers) return false; listbox_selectall('a', true)" data-cf-modified-b84b935e0eb907114ba3568f-="">all</a>,
+                <a href="#" onclick="if (!window.__cfRLUnblockHandlers) return false; listbox_selectall('a', false)" data-cf-modified-b84b935e0eb907114ba3568f-="">none</a>
+                </td>
+                <td>&nbsp;&nbsp;&nbsp;</td>
+                <td>
+                <SELECT id="s" size="10" multiple>
+                    <OPTION value="a">Afghanistan</OPTION>
+                    <OPTION value="b">Bahamas</OPTION>
+                    <OPTION value="c">Barbados</OPTION>
+                    <OPTION value="d">Belgium</OPTION>
+                    <OPTION value="e">Bhutan</OPTION>
+                    <OPTION value="f">China</OPTION>
+                    <OPTION value="g">Croatia</OPTION>
+                    <OPTION value="h">Denmark</OPTION>
+                    <OPTION value="i">France</OPTION>
+                </SELECT>
+                </td>
+                <td valign="center">
+                <a href="#" onclick="if (!window.__cfRLUnblockHandlers) return false; listbox_moveacross('s', 'd')" data-cf-modified-b84b935e0eb907114ba3568f-="">&gt;&gt;</a>
+                <br/>
+                <a href="#" onclick="if (!window.__cfRLUnblockHandlers) return false; listbox_moveacross('d', 's')" data-cf-modified-b84b935e0eb907114ba3568f-="">&lt;&lt;</a>
+                </td>
+                <td>
+                <SELECT id="d" size="10" multiple >
+                    <!--OPTION value="a">Afghanistan</OPTION>
+                    <OPTION value="b">Bahamas</OPTION>
+                    <OPTION value="c">Barbados</OPTION>
+                    <OPTION value="d">Belgium</OPTION>
+                    <OPTION value="e">Bhutan</OPTION>
+                    <OPTION value="f">China</OPTION>
+                    <OPTION value="g">Croatia</OPTION>
+                    <OPTION value="h">Denmark</OPTION>
+                    <OPTION value="i">France</OPTION-->
+                </SELECT>
+                </td>
+                </tr>
+                </table>
+                &nbsp;&nbsp;&nbsp;
+                <div>Age Range
+                <span>From:</span>
+                <SELECT id="age" onchange="if (!window.__cfRLUnblockHandlers) return false; dropdown_rangeChange('age', 'age1')">
+                    <OPTION value="0">0</option>
+                    <OPTION value="5">5</OPTION>
+                    <OPTION value="10">10</OPTION>
+                    <OPTION value="15">15</OPTION>
+                    <OPTION value="20">20</OPTION>
+                    <OPTION value="25">25</OPTION>
+                    <OPTION value="30">30</OPTION>
+                    <OPTION value="35">35</OPTION>
+                    <OPTION value="40">40</OPTION>
+                    <OPTION value="45">45</OPTION>
+                    <OPTION value="50">50</OPTION>
+                    <OPTION value="55">55</OPTION>
+                    <OPTION value="60">60</OPTION>
+                    <OPTION value="65">65</OPTION>
+                    <OPTION value="70">70</OPTION>
+                    <OPTION value="75">75+</OPTION>
+                </SELECT>
+                <span>To:</span>
+                <SELECT id="age1">
+                    <OPTION value="4">4</OPTION>
+                    <OPTION value="9">9</OPTION>
+                    <OPTION value="14">14</OPTION>
+                    <OPTION value="19">19</OPTION>
+                    <OPTION value="24">24</OPTION>
+                    <OPTION value="29">29</OPTION>
+                    <OPTION value="34">34</OPTION>
+                    <OPTION value="39">39</OPTION>
+                    <OPTION value="44">44</OPTION>
+                    <OPTION value="49">49</OPTION>
+                    <OPTION value="54">54</OPTION>
+                    <OPTION value="59">59</OPTION>
+                    <OPTION value="64">64</OPTION>
+                    <OPTION value="69">69</OPTION>
+                    <OPTION value="74">74</OPTION>
+                    <OPTION value="75">75+</OPTION>
+                </SELECT>
+                </div>
+                <div>Year
+                <span>From:</span>
+                <select id ="year" onchange="if (!window.__cfRLUnblockHandlers) return false; year_change()">
+                </select>
+                
+                <span>To:</span>
+                <select id ="year1">
+                </select>
+                </div>
+                <div>Gender
+                <input type="checkbox" id="male" value='1'>Male</input>
+                <input type="checkbox" id="female" value='2'>Female</input>
+                </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+                
+                
+                
+                
+          </div>
+    </body>
+</html>
