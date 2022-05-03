@@ -75,7 +75,7 @@
 	</div>
 	<div>Age Range
 		<span>From:</span>
-		<SELECT id="age" onchange="dropdown_rangeChange('age', 'age1')">
+		<SELECT id="age" name = "startingAge" onchange="dropdown_rangeChange('age', 'age1')">
 			<OPTION value="0">0</option>
 			<OPTION value="5">5</OPTION>
 			<OPTION value="10">10</OPTION>
@@ -94,7 +94,7 @@
 			<OPTION value="75">75+</OPTION>
 		</SELECT>
 		<span>To:</span>
-		<SELECT id="age1">
+		<SELECT id="age1" name = "endingAge">
 			<OPTION value="4">4</OPTION>
 			<OPTION value="9">9</OPTION>
 			<OPTION value="14">14</OPTION>
@@ -116,19 +116,19 @@
     
 		<div>Year
 		<span>From:</span>
-		<select id ="year" name="year" onchange="year_change()">
+		<select id ="year" name="startingYear" onchange="year_change()">
 		</select>
 		
 		<span>To:</span>
-		<select id ="year1">
+		<select id ="year1" name = "endingYear">
 		</select>
 		</div>
 	
 		<div>Gender
-			<input type="checkbox" id="male" value='1'>Male</input>
-			<input type="checkbox" id="female" value='2'>Female</input>
+			<input type="checkbox" id="male" name = "male" value='1'>Male</input>
+			<input type="checkbox" id="female" name = "female" value='2'>Female</input>
 		</div>
-		<div><button type="button" onclick="execute()">Execute</button></div>
+		<div><button type="submit" >Execute</button></div>
 	</form>
 	<!-- JavaScript code to enable the drop down function -->
 	<script>

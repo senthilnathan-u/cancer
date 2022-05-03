@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 
-from platformdirs import os
+import os
 import urllib
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -78,13 +78,12 @@ WSGI_APPLICATION = 'cancer.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'Cancer',
-        #'HOST':'mongodb+srv://admin:'+urllib.parse.quote_plus("admin")+'@cluster0.uxhzr.mongodb.net/test?retryWrites=true&ssl=true&ssl_cert_reqs=CERT_NONE&w=majority',
-        
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
+#Change it back to Djongo thing!
 
 
 # Password validation
